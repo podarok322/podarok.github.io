@@ -1,0 +1,98 @@
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+body{
+    color: pink;
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    background-color: #525252;
+}
+
+.time {
+    flex-direction: column;
+    font-size: 50px;
+    display: flex;               
+    justify-content: center;     
+    align-items: center;         
+    height: 100vh;               
+  }
+
+// Size can also be negative; see how it's smaller than the element
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+
+
+//=== Set button colors
+// If you wonder why use Sass vars or CSS custom properties...
+  // Make a map with the class names and matching colors
+$colors: (
+  
+  raise: #ffa260, 
+  
+);
+
+// Sass variables compile to a static string; CSS variables are dynamic and inherited
+  // Loop through the map and set CSS custom properties using Sass variables
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{adjust-hue($color, 45deg)};
+  }
+}
+
+// Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
+button {  
+  color: var(--color);
+  transition: 0.25s;
+  
+  &:hover,
+  &:focus { 
+    border-color: var(--hover);
+    color: #fff;
+  }
+}
+
+//=== Pen styling, ignore
+body {
+  color: #fff;
+  background: hsl(227, 10%, 10%);
+//   font: 300 1em 'Fira Sans', sans-serif;
+  
+  // Center everything ever
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+}
+
+// Basic button styles
+button {
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+h1 { font-weight: 400; }
+
+code { 
+  color: #e4cb58;
+  font: inherit;
+}
+

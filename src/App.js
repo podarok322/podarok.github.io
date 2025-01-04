@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
+import CountdownTimer from './CountdownTimer';
+import SecondPage from './SecondPage'; // Импортируйте вашу вторую страницу
 
-function App() {
+
+const App = () => {
+  const [isTimerEnded, setIsTimerEnded] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="time">
+        <Routes>
+          <Route path="/" element={
+            <>
+              <CountdownTimer 
+                targetDate="2025-01-03T19:20:00" 
+                onTimerEnd={() => setIsTimerEnded(true)} 
+              />
+              {isTimerEnded && (
+                <Link to="/second-page">
+                  <button class="raise">Получить подарок</button>
+                </Link>
+              )}
+            </>
+          } />
+          <Route path="/second-page" element={<SecondPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
